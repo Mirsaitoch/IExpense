@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B215A812B00CB4C004D72E3 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B215A802B00CB4C004D72E3 /* AddView.swift */; };
 		3BEF540C2AFE877E0083B810 /* iExpenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEF540B2AFE877E0083B810 /* iExpenseApp.swift */; };
 		3BEF540E2AFE877E0083B810 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEF540D2AFE877E0083B810 /* ContentView.swift */; };
 		3BEF54102AFE877F0083B810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BEF540F2AFE877F0083B810 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B215A802B00CB4C004D72E3 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		3BEF54082AFE877E0083B810 /* iExpense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iExpense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BEF540B2AFE877E0083B810 /* iExpenseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iExpenseApp.swift; sourceTree = "<group>"; };
 		3BEF540D2AFE877E0083B810 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				3BEF540B2AFE877E0083B810 /* iExpenseApp.swift */,
 				3BEF540D2AFE877E0083B810 /* ContentView.swift */,
+				3B215A802B00CB4C004D72E3 /* AddView.swift */,
 				3BEF540F2AFE877F0083B810 /* Assets.xcassets */,
 				3BEF54112AFE877F0083B810 /* iExpense.entitlements */,
 				3BEF54122AFE877F0083B810 /* Preview Content */,
@@ -141,6 +144,7 @@
 			files = (
 				3BEF540E2AFE877E0083B810 /* ContentView.swift in Sources */,
 				3BEF540C2AFE877E0083B810 /* iExpenseApp.swift in Sources */,
+				3B215A812B00CB4C004D72E3 /* AddView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +296,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mirsait.sabirzyanov.iExpense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -330,7 +335,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mirsait.sabirzyanov.iExpense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
