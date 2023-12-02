@@ -6,18 +6,11 @@
 //
 
 import SwiftUI
-
-
-struct Item: Identifiable, Codable{
-    var id = UUID()
-    let name: String
-    let type: String
-    let amount: Double
-}
+import SwiftData
 
 struct productCard: View{
     
-    var item: Item
+    var item: Expense
     
     var body: some View{
         HStack{
@@ -30,70 +23,56 @@ struct productCard: View{
                 .font(item.amount < 100.0 ? .caption :
                         (item.amount < 1000.0 && item.amount > 100.0) ? .footnote :
                         .headline
-            )
+                )
         }
     }
 }
 
-@Observable
-class Expenses{
-    var items = [Item](){
-        didSet{
-            if let encoded = try? JSONEncoder().encode(items){
-                UserDefaults.standard.setValue(encoded, forKey: "Items")
-            }
-        }
-    }
-    
-    init(){
-        if let savedItems = UserDefaults.standard.data(forKey: "Items"){
-            if let decoder = try? JSONDecoder().decode([Item].self, from: savedItems){
-                items = decoder
-                return
-            }
-        }
-        items = []
-    }
-}
+
 
 struct ContentView: View {
     
-    @State var expenses = Expenses()
-    
+    @Environment(\.modelContext) var modelContext
+    @Query private var expenses: [Expense]
     @State private var showAddPanel = false
+    @State private var selectedType = "All"
+    var types = ["All", "Business", "Personal"]
+    @State private var sortOrder = SortDescriptor(\Expense.name)
+
     var body: some View {
         NavigationStack{
-            List{
-                Section("Personal"){
-                    ForEach(expenses.items){item in
-                        if item.type == "Personal"{
-                            productCard(item: item)
-                        }
-                    }.onDelete(perform: removeItem)
-                }
-                Section("Business"){
-                    ForEach(expenses.items){item in
-                        if item.type == "Business"{
-                            productCard(item: item)
-                        }
-                    }.onDelete(perform: removeItem)
-                }
-            }
+            ExpensesView(type: selectedType, sortOrder: sortOrder)
             .toolbar{
-                    NavigationLink{
-                        AddView(expenses: expenses)
-                    } label:{
-                        Image(systemName: "plus")
-                    }
-                        
                 
+                
+                Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                    Picker("Sort", selection: $sortOrder) {
+                        Text("Sort by Name")
+                            .tag(SortDescriptor(\Expense.name))
+
+                        Text("Sort by Amount")
+                            .tag(SortDescriptor(\Expense.amount))
+                    }
+                }
+                Menu("Type", systemImage: "rectangle.stack.person.crop") {
+                    Picker("Sort", selection: $selectedType) {
+                        Text("All")
+                            .tag("All")
+                        Text("Business")
+                            .tag("Business")
+                        Text("Personal")
+                            .tag("Personal")
+                    }
+                }
+                
+                NavigationLink{
+                    AddView()
+                } label:{
+                    Image(systemName: "plus")
+                }
             }
             .navigationTitle("IExpense")
         }
-    }
-    
-    func removeItem(at offsets: IndexSet){
-        expenses.items.remove(atOffsets: offsets)
     }
 }
 
